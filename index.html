@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+
+	<title>e-commerce website</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="/css/jquery.bxslider.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="icon" type="image/gif" href="images/animated_favicon1.gif">
+
+
+</head>
+
+<body>
+	<div class="wrapper">
+        <hr class="up">
+<!-- up header section -->
+		<div class="up_header">
+			<div class="menu">
+				<ul>
+				<li><a href="index.html" class="active">Home</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+            <div class="account">
+				<ul>
+				<li><a href="welcome.html">My Account</a></li>
+				</ul>
+			</div>
+		</div>
+        <hr class="regular">
+<!-- header section start-->
+        <div class="header">
+            <div class="logo">
+                <img src="images/4.png">
+            </div>
+                <div class="header_middle">
+                    <div class="info">
+                        <b>Ph:</b> +601127576227   |   <b>Mail:</b>playgame615@gmail.com
+                    </div>
+                    <div class="search">
+                        <input type="search" class="search_style" placeholder="Type and Press Enter to search">
+                    </div>
+                </div>
+            <div class="end_header">
+                <button class="cart"><img src="images/cart.png"></br>My Cart</button>
+            </div>
+            
+        </div>
+		<hr class="regular">
+<!-- header section end -->
+<!--    side menu   -->
+    <div class="menu_shop">
+            <ul>
+                <li><a href="#mens">Baby Boy</a></li>
+                <hr class="menu">
+                <li><a href="#womens">Baby Girl</a></li>
+                <hr class="menu">
+                <li><a href="#kids">Kids Shoes</a></li>
+                <hr class="menu">
+                <li><a href="#">Baby Toys</a></li>
+               
+                <hr class="menu">
+                <li><a href="items.html">All Items</a></li>
+            </ul>
+        </div>
+<!--    side menu end   -->
+<!--    slide    -->
+            <div class="banner">
+            <ul class="bxslider">
+            <li><img src="images/1.png"></li>
+            <li><img src="images/2.jpg"></li>
+            <li><img src="images/3.jpg"</li>
+            </ul>
+</div>
+    
+            <script src="js/jquery.js"></script>
+            <script src="js/jquery.bxslider.min.js"></script>
+            <script>
+               $(document).ready(function(){
+
+                $('.bxslider').bxSlider({
+                        auto: true,
+                        controls: false,
+                        pager: false,
+                        });
+                        });
+            </script>
+        <hr class="regular">
+    
+<!-- featured products -->
+        <div id="feature" class="feature">
+            Featured Iteams Food <a href="items.html">More</a>
+        </div>
+        <div class="product">
+        <div class="mg-image"><img src="images/prod1.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 100</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/prod2.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 120</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/prod3.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 450</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/prod4.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 125</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+
+<!-- mens products -->
+        <div id="mens" class="feature">
+            Baby Boy <a href="items.html">More</a>
+        </div>
+        <div class="product">
+        <div class="mg-image"><img src="images/m1.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 140</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/m2.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price:RM 100</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/m3.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 150</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/m4.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 95</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+
+<!-- Womens products -->
+        <div id="womens" class="feature">
+            Baby Girl <a href="items.html">More</a>
+        </div>
+        <div class="product">
+        <div class="mg-image"><img src="images/w1.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 90</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/w2.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 60</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/w3.jpg"></div>
+        <div class="details"><h2>t</h2><p>Product Details goes here</br>Price: RM 120</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/w4.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price:RM 125</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+<!-- Kids products -->
+        <div id="kids" class="feature">
+            Kids Shoes <a href="items.html">More</a>
+        </div>
+        <div class="product">
+        <div class="mg-image"><img src="images/k1.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 40</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/k2.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price:RM 60</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/k3.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price: RM 80</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+    <div class="product">
+        <div class="mg-image"><img src="images/k4.jpg"></div>
+        <div class="details"><h2></h2><p>Product Details goes here</br>Price:RM 75</p></div>
+        <div class="buy"><a href="#">Add to cart</a></div>
+        </div>
+        <hr class="regular">
+<!--    brands logo     -->
+        <div class="brands">
+            :::: Our Brands ::::
+        </div>
+        <center><img src="images/brands.png"></center>
+<div class="footer">
+       <div class="ft_left">&copy;HELP UNIVERSITY-2017(IT)</br>
+    Designed by:MD MEHEDI HASSAN,MD MAHBUBER RAHMAN
+        </div>
+        <div class="ft_right">
+            <img src="images/b1.png" width="580px">
+        </div>
+       </div>
+	</div>
+    
+</body>
+
+</html>

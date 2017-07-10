@@ -1,0 +1,139 @@
+<?php 
+session_start(); // ALWAYS most top of the website 
+  
+include "conn.html"; // The Databaseconnection 
+  
+// Login 
+if (isset($_POST['submit'])){ 
+  
+  $_POST = db_escape($_POST); 
+  
+  $sql = "SELECT id FROM members 
+         WHERE user='{$_POST['user']}' 
+         AND pass='{$_POST['passwd']}'"; 
+  $result = mysql_query($sql); 
+  
+  // If username and password wasnt found 
+  // send to form with error message 
+  if (mysql_num_rows($result) == 0){ 
+    header("Location: login.html?badlogin="); 
+    exit; 
+  } 
+  
+  // Set session with unique login 
+  $_SESSION['sess_id'] = mysql_result($result, 0, 'id'); 
+  $_SESSION['sess_user'] = $_POST['user']; 
+  header("Location: welcome.html"); 
+  exit; 
+} 
+  
+// Logout 
+if (isset($_GET['logout'])){ 
+  session_unset(); 
+  session_destroy(); 
+  header("Location: login.html"); 
+  exit; 
+} 
+?> 
+<!doctype html>
+<html>
+<head>
+
+	<title>e-commerce website</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="icon" type="image/gif" href="images/animated_favicon1.gif">
+    
+</head>
+
+<body>
+	<div class="contactwr">
+        <hr class="up">
+<!-- up header section -->
+			<div class="up_header">
+			<div class="menu">
+				<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+            <div class="account">
+				<ul>
+				<li><a href="welcome.html">My Account</a></li>
+				</ul>
+			</div>
+		</div>
+        <hr class="regular">
+<!-- header section start-->
+        <div class="header">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+                <div class="header_middle">
+                    <div class="info">
+                        <b>Ph:</b> +123 456 7890   |   <b>Mail:</b> mail@contact.com
+                    </div>
+                    <div class="search">
+                        <input type="search" class="search_style" placeholder="Type and Press Enter to search">
+                    </div>
+                </div>
+            <div class="end_header">
+                <button class="cart"><img src="images/cart.png"></br>My Cart</button>
+            </div>
+            
+        </div>
+		<hr class="regular">
+<!-- header section end -->
+<div class="loginbox">
+    <?php 
+  
+// If not logged in show form, else logout link 
+if (!isset($_SESSION['sess_user'])){ 
+  
+  echo "<h2>Log in</h2>\n"; 
+  
+  // Show error message at bad login 
+  if (isset($_GET['badlogin'])){ 
+    echo "Wrong username or password!<br>\n"; 
+    echo "Try again!\n"; 
+  } 
+  
+?> 
+<form action="login.html" method="post"> 
+<hr class="regular">
+Username:<br> 
+<input type="text" name="user" class="loginput"><br> 
+<hr class="regular">
+Password:<br> 
+<input type="password" name="passwd" class="loginput"><br> 
+<input type="submit" name="submit" value="Log in" class="loginbutton"> 
+</form> 
+    <hr class="regular">
+Not a member yet?<br> 
+<h2><a href="register.html">Register Now >></a></h2>
+<?php 
+  
+} else { 
+  
+  echo "<a href=\"login.html?logout=\">Log out</a>\n"; 
+  
+} 
+  
+?>
+    </div>
+<!--    footer      -->
+<div class="footer">
+        <div class="ft_left">&copy; MIST 2015.</br>
+    Designed by: Saif, Akash (CSE 10-11)
+        </div>
+    <div class="ft_right">
+            <img src="images/b1.png" width="580px">
+        </div>
+       </div>
+        
+	</div>
+</body>
+
+</html>

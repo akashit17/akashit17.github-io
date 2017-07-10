@@ -1,0 +1,185 @@
+<?php 
+session_start(); 
+  
+include "conn.php"; 
+  
+if (isset($_POST['submit'])){ 
+  
+  $_POST = db_escape($_POST); 
+  
+  // Remove possible spaces in beginning or at the end 
+  foreach($_POST as $key => $val){ 
+    $_POST[$key] = trim($val); 
+  } 
+  
+  // Check for empty fields 
+  if (empty($_POST['user']) || empty($_POST['passwd']) || 
+      empty($_POST['name']) || empty($_POST['email'])) { 
+    $reg_error[] = 0; 
+  } 
+  
+  // Check if the username is avaible 
+  $sql = "SELECT COUNT(*) FROM members WHERE user='{$_POST['user']}'"; 
+  $result = mysql_query($sql); 
+  if (mysql_result($result, 0) > 0) { 
+    $reg_error[] = 1; 
+  } 
+  
+  // Check if email seems to be okay 
+  if (!preg_match('/^[-A-Za-z0-9_.]+[@][A-Za-z0-9_-]+([.][A-Za-z0-9_-]+)*[.][A-Za-z]{2,6}$/', $_POST['email'])) { 
+    $reg_error[] = 2;    
+  } 
+  
+  // Check so the passwords match 
+  if ($_POST['passwd'] != $_POST['passwd2']) { 
+    $reg_error[] = 3; 
+  } 
+  
+  //No errors? Save info and login and redirect to welcome.php 
+  if (!isset($reg_error)) { 
+    $sql = "INSERT INTO members(user, pass, name, email) 
+            VALUES('{$_POST['user']}', '{$_POST['passwd']}', '{$_POST['name']}', '{$_POST['email']}')"; 
+    mysql_query($sql); 
+    
+    $_SESSION['sess_id'] = mysql_insert_id(); 
+    $_SESSION['sess_user'] = $_POST['user']; 
+    header("Location: welcome.html"); 
+    exit;      
+  
+  } 
+  
+} else { 
+  
+  // Set variables for empty form 
+  for ($i=0; $i<4; $i++) { 
+    $back[$i] = ""; 
+  } 
+  
+} 
+  
+$error_list[0] = "All fields isn't filled out"; 
+$error_list[1] = "The username is already taken"; 
+$error_list[2] = "Bad email"; 
+$error_list[3] = "The passwords dosn't match"; 
+  
+?> 
+<!doctype html>
+<html>
+<head>
+
+	<title>e-commerce website</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="icon" type="image/gif" href="images/animated_favicon1.gif">
+    
+</head>
+
+<body>
+	<div class="contactwr">
+        <hr class="up">
+<!-- up header section -->
+			<div class="up_header">
+			<div class="menu">
+				<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+            <div class="account">
+				<ul>
+				<li><a href="welcome.html">My Account</a></li>
+				</ul>
+			</div>
+		</div>
+        <hr class="regular">
+<!-- header section start-->
+        <div class="header">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+                <div class="header_middle">
+                    <div class="info">
+                        <b>Ph:</b> +123 456 7890   |   <b>Mail:</b> mail@contact.com
+                    </div>
+                    <div class="search">
+                        <input type="search" class="search_style" placeholder="Type and Press Enter to search">
+                    </div>
+                </div>
+            <div class="end_header">
+                <button class="cart"><img src="images/cart.png"></br>My Cart</button>
+            </div>
+            
+        </div>
+		<hr class="regular">
+<!-- header section end -->
+<div class="regbox">
+    <h2>Register</h2> 
+<?php 
+if (isset($reg_error)){ 
+  
+  echo "Something went wrong:<br>\n"; 
+  echo "<ul>\n"; 
+  for ($i=0; $i<sizeof($reg_error); $i++) { 
+    echo "<li>{$error_list[$reg_error[$i]]}</li>\n"; 
+  } 
+  echo "</ul>\n"; 
+  
+  $back[0] = stripslashes($_POST['user']); 
+  $back[2] = stripslashes($_POST['name']); 
+  $back[3] = stripslashes($_POST['email']); 
+  
+} 
+?> 
+<form action="register.html" method="post"> 
+<table cellspacing="3"> 
+
+<tr> 
+<td>Username:</td> 
+<td><input type="text" name="user" class="reginput" value="<?php echo $back[0]; ?>"></td>
+<tr> 
+<td>Your name:</td> 
+<td><input type="text" name="name" class="reginput" value="<?php echo $back[2]; ?>"></td> 
+</tr> 
+
+<tr> 
+<td>Password:</td> 
+<td><input type="password" name="passwd" class="reginput" value=""></td> 
+</tr> 
+  
+<tr> 
+<td>Repeat password:</td> 
+<td><input type="password" name="passwd2" class="reginput" value=""></td> 
+</tr> 
+  
+<tr> 
+<td>E-mail</td> 
+<td><input type="text" name="email" class="reginput" value="<?php echo $back[3]; ?>"></td> 
+</tr> 
+  
+<tr> 
+<td colspan="2" align="center"> 
+  <input type="submit" name="submit" class="loginbutton" value="Save & Register Account"> 
+</td> 
+</tr> 
+
+    <h3><center><a href="login.html"><< Back to Log In Page</a></center></h3>
+
+</table> 
+</form> 
+</div>
+<!--    footer      -->
+<div class="footer">
+        <div class="ft_left">&copy; MIST 2015.</br>
+    Designed by: Saif, Akash (CSE 10-11)
+        </div>
+    <div class="ft_right">
+            <img src="images/b1.png" width="580px">
+        </div>
+       </div>
+        
+	</div>
+</body>
+
+</html>
